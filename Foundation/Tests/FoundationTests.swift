@@ -6,6 +6,12 @@
 import ObsidianTesting
 @testable import ObsidianFoundation
 
-@Test func example() async throws {
-  // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+@Suite("ObsidianFoundation")
+struct ObsidianFoundationTests {
+  /// Test presumably only compiles if it's true.
+  @Test("Re-exports Foundation (simple test)")
+  func re_exports_foundation() throws {
+    let uuid = UUID()
+    #expect(uuid == uuid)
+  }
 }
