@@ -12,12 +12,24 @@ let package = Package(
   ],
   targets: [
     .target(name: "ObsidianCore", path: "Core/Source"),
-    .testTarget(name: "ObsidianCoreTests", path: "Core/Tests"),
+    .testTarget(
+      name: "ObsidianCoreTests",
+      dependencies: ["ObsidianCore", "ObsidianTesting"],
+      path: "Core/Tests"
+    ),
     
     .target(name: "ObsidianFoundation", path: "Foundation/Source"),
-    .testTarget(name: "ObsidianFoundationTests", path: "Foundation/Tests"),
+    .testTarget(
+      name: "ObsidianFoundationTests",
+      dependencies: ["ObsidianFoundation", "ObsidianTesting"],
+      path: "Foundation/Tests"
+    ),
 
     .target(name: "ObsidianTesting", path: "Testing/Source"),
-    .testTarget(name: "ObsidianTestingTests", path: "Testing/Tests"),
+    .testTarget(
+      name: "ObsidianTestingTests",
+      dependencies: ["ObsidianTesting"],
+      path: "Testing/Tests"
+    ),
   ]
 )
