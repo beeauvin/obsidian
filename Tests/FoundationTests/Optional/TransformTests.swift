@@ -5,9 +5,9 @@
 
 import Testing
 
-@testable import ObsidianFoundation
+@testable import Obsidian
 
-@Suite("ObsidianFoundation/Optional: Transform")
+@Suite("Obsidian/Foundation/Optional: Transform")
 struct OptionalTransformTests {
   private func sync_transformer(_ value: String) -> Int { value.count }
   private func sync_transformer_optional(_ value: String) -> Int? {

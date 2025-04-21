@@ -5,9 +5,9 @@
 
 import Testing
 
-@testable import ObsidianFoundation
+@testable import Obsidian
 
-@Suite("ObsidianFoundation/Optional: Optionally")
+@Suite("Obsidian/Foundation/Optional: Optionally")
 struct OptionalOptionallyTests {
   private let default_value: String = "Default"
   private let default_nothing: Optional<String> = .none

@@ -5,13 +5,13 @@
 
 import Testing
 
-@testable import ObsidianFoundation
+@testable import Obsidian
 
 enum TestError: Error {
   case expected
 }
 
-@Suite("ObsidianFoundation/Optional: When")
+@Suite("Obsidian/Foundation/Optional: When")
 struct OptionalWhenTests {
   // Test closures
   private func something_success<T>(_ value: T) { #expect(Bool(true)) }

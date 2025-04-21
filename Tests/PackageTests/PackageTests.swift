@@ -4,8 +4,14 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import Testing
-@testable import ObsidianCore
+@testable import Obsidian
 
-@Test func example() async throws {
-    // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+@Suite("Obsidian/Package")
+struct ObsidianPackageTests {
+  /// Test presumably only compiles if it's true.
+  @Test("Re-exports Foundation (simple test)")
+  func re_exports_foundation() throws {
+    let uuid = UUID()
+    #expect(uuid == uuid)
+  }
 }

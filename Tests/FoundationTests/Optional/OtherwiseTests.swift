@@ -5,9 +5,9 @@
 
 import Testing
 
-@testable import ObsidianFoundation
+@testable import Obsidian
 
-@Suite("ObsidianFoundation/Optional: Otherwise")
+@Suite("Obsidian/Foundation/Optional: Otherwise")
 struct OptionalOtherwiseTests {
   private let default_value: String = "Default"
   private func sync_provider () -> Int { 99 }
