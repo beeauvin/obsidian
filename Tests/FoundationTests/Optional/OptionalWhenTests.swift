@@ -7,12 +7,12 @@ import Testing
 
 @testable import Obsidian
 
-enum TestError: Error {
-  case expected
-}
-
 @Suite("Obsidian/Foundation/Optional: When")
 struct OptionalWhenTests {
+  enum TestError: Error {
+    case expected
+  }
+
   // Test closures
   private func something_success<T>(_ value: T) { #expect(Bool(true)) }
   private func something_failure<T>(_ value: T) { #expect(Bool(false)) }
