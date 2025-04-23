@@ -6,6 +6,7 @@ let package = Package(
   name: "Obsidian",
   platforms: [
     .macOS(.v10_15),
+    .iOS(.v12),
   ],
   products: [
     .library(name: "Obsidian", targets: ["Obsidian"]),
