@@ -154,6 +154,187 @@ let value = await local_value.optionally {
 }.otherwise("Default")
 ```
 
+### Result Extensions
+
+Obsidian provides a suite of natural language extensions for Swift's Result type that make error
+handling more expressive and readable.
+
+#### `otherwise` - Extracting values with fallbacks
+
+```swift
+// Extract the success value or use a default:
+let computation_result: Result<Int, Error> = perform_risky_computation()
+let value = computation_result.otherwise(0)
+
+// With a lazy-evaluated fallback:
+let result = computation_result.otherwise {
+    perform_fallback_computation()
+}
+
+// With access to the error:
+let profile = api_result.otherwise { error in
+    // Create a fallback profile using error information
+    logger.log("Using default profile due to error: \(error)")
+    return default_profile
+}
+
+// With async support:
+let data = await network_result.otherwise {
+    await download_from_backup_server()
+}
+```
+
+#### `transform` - Transforming success values
+
+```swift
+// Transform success values while preserving errors:
+let string_result: Result<String, Error> = .success("Hello")
+let length_result = string_result.transform { string in
+    string.count
+}
+
+// For transformations that might fail (flatMap equivalent):
+let file_contents_result = file_path_result.transform { path in
+    read_file(at: path)  // Returns Result<String, Error>
+}
+
+// With async support:
+let profile_result = await user_id_result.transform { id in
+    await user_service.fetch_profile(for: id)
+}
+```
+
+#### `when` - Handling success and failure cases
+
+```swift
+// Execute code only on success:
+user_result.when(success: { user in
+    display_user_profile(user)
+})
+
+// Execute code only on failure:
+user_result.when(failure: { error in
+    log_error(error)
+})
+
+// Handle both cases in one call:
+user_result.when(
+    success: { user in
+        display_user_profile(user)
+    },
+    failure: { error in
+        display_error_message(for: error)
+    }
+)
+
+// With method chaining (all `when` methods return self):
+user_result
+    .when(success: { user in log_user_found(user) })
+    .when(failure: { error in log_error(error) })
+
+// With async support:
+await user_result.when(
+    success: { user in
+        await user_service.process_user_async(user)
+    },
+    failure: { error in
+        await error_service.handle_error_async(error)
+    }
+)
+```
+
+#### `recover` - Attempting to recover from failures
+
+```swift
+// Try to recover from failures by providing an alternative success:
+let data_result: Result<Data, NetworkError> = api.fetch_data()
+let recovered_result = data_result.recover { error in
+    if cache.has_valid_data_for(request) {
+        return cache.get_data_for(request)
+    } else {
+        return nil  // Unable to recover, will maintain failure
+    }
+}
+
+// Recover with a different error type:
+let data_result: Result<Data, ServiceAError> = service_a.fetch_data()
+let recovered_result = data_result.recover { error in
+    return service_b.fetch_data()  // Returns Result<Data, ServiceBError>
+}
+
+// With async support:
+let recovered_result = await data_result.recover { error in
+    return await backup_service.try_fetch_data()
+}
+```
+
+#### `reframe` - Transforming error values
+
+```swift
+// Transform error types while preserving success values:
+let network_result: Result<Data, NetworkError> = .failure(.connectionLost)
+let app_result = network_result.reframe { network_error in
+    AppError.network(underlying: network_error)
+}
+
+// Complex error handling that might produce a success:
+let final_result = network_result.reframe { error in
+    if error == .notFound {
+        // Return a success with default data
+        return .success(default_data)
+    } else {
+        // Return a new error type
+        return .failure(AppError.network(underlying: error))
+    }
+}
+
+// With async support:
+let domain_result = await api_result.reframe { api_error in
+    await error_processor.convert_to_domain_error(api_error)
+}
+```
+
+#### `catching` - Creating results from throwing functions
+
+```swift
+// Convert a throwing function call into a Result:
+let result = Result<Data, Error>.catching {
+    try file_manager.contents(atPath: path)
+}
+
+// Chain with other Result extensions:
+let text = Result<Data, Error>.catching {
+    try file_manager.contents(atPath: path)
+}.transform { data in
+    String(data: data, encoding: .utf8)
+}.otherwise("Empty file")
+
+// With async support:
+let result = await Result<Data, Error>.catching {
+    try await network_service.fetch_data(from: url)
+}
+```
+
+### Transmutation Between Result and Optional
+
+Obsidian provides seamless conversion between Result and Optional types with
+natural language methods.
+
+#### `transmute` - Converting between Result and Optional
+
+```swift
+// Convert an Optional to a Result with a specific error:
+let username: String? = get_username_from_database()
+let result: Result<String, UserError> = username.transmute(as: UserError.missing_username)
+
+// Convert a Result to an Optional (keeping success value):
+let user_result: Result<User, APIError> = api.fetch_user(id: user_id)
+let user_optional: User? = user_result.transmute()
+
+// Convert a Result to an Optional (keeping error value):
+let error_optional: APIError? = user_result.transmute(.error)
+```
+
 ### Protocols
 
 Obsidian includes several protocols that provide consistent interfaces across types:
@@ -226,7 +407,7 @@ Add Obsidian to your Swift package dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/beeauvin/Obsidian.git", from: "0.1.0")
+    .package(url: "https://github.com/beeauvin/Obsidian.git", from: "0.2.0")
 ]
 ```
 
@@ -258,6 +439,33 @@ await cached_data.when(
     },
     nothing: {
         await fetch_and_cache(key)
+    }
+)
+```
+
+### Comprehensive Error Handling with Result
+
+```swift
+// Complete error handling pipeline using Result extensions
+let result = await Result<Data, Error>.catching {
+    try await network.fetch(from: url)
+}.transform { data in
+    try JSONDecoder().decode(User.self, from: data)
+}.recover { error in
+    if let cached_user = cache.get_user() {
+        return cached_user
+    }
+    return nil  // Unable to recover
+}.reframe { error in
+    UserError.fetch(underlying: error)
+}.when(
+    success: { user in
+        await analytics.log_successful_fetch(user.id)
+        display_user(user)
+    },
+    failure: { error in
+        await error_reporter.report(error)
+        display_error(error)
     }
 )
 ```
