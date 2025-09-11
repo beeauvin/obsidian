@@ -15,7 +15,7 @@ let package = Package(
     .library(name: "Obsidian", targets: ["Obsidian"]),
   ],
   targets: [
-    .target(name: "Obsidian", path: "Sources"),
-    .testTarget(name: "ObsidianTests", dependencies: ["Obsidian"], path: "Tests"),
+    .target(name: "Obsidian", path: "Sources/Core"),
+    .testTarget(name: "ObsidianTests", dependencies: ["Obsidian"], path: "Tests/Core"),
   ]
 )
