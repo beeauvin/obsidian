@@ -13,9 +13,20 @@ let package = Package(
   ],
   products: [
     .library(name: "Obsidian", targets: ["Obsidian"]),
+    .library(name: "ObsidianCore", targets: ["ObsidianCore"]),
+    .library(name: "ObsidianFoundation", targets: ["ObsidianFoundation"]),
   ],
   targets: [
-    .target(name: "Obsidian", path: "Sources/Core"),
-    .testTarget(name: "ObsidianTests", dependencies: ["Obsidian"], path: "Tests/Core"),
+    .target(name: "Obsidian", dependencies: [
+      .target(name: "ObsidianCore"),
+      .target(name: "ObsidianFoundation"),
+    ], path: "Sources/Obsidian"),
+    .testTarget(name: "ObsidianTests", dependencies: ["Obsidian"], path: "Tests/Obsidian"),
+
+    .target(name: "ObsidianCore", path: "Sources/Core"),
+    .testTarget(name: "ObsidianCoreTests", dependencies: ["ObsidianCore"], path: "Tests/Core"),
+    
+    .target(name: "ObsidianFoundation", dependencies: ["ObsidianCore"], path: "Sources/Foundation"),
+    .testTarget(name: "ObsidianFoundationTests", dependencies: ["ObsidianFoundation"], path: "Tests/Foundation"),
   ]
 )

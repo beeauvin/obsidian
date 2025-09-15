@@ -4,10 +4,10 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import Testing
-@testable import Obsidian
+@testable import ObsidianFoundation
 
-@Suite("Obsidian/Package")
-struct ObsidianPackageTests {
+@Suite("Obsidian/Foundation")
+struct ObsidianFoundationPackageTests {
   /// Test presumably only compiles if it's true.
   @Test("Re-exports Foundation (simple test)")
   func re_exports_foundation() throws {

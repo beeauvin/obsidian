@@ -5,7 +5,7 @@
 
 import Testing
 
-@testable import Obsidian
+@testable import ObsidianFoundation
 
 @Suite("Obsidian/Protocols: Describable")
 struct DescribableTests {

@@ -5,7 +5,7 @@
 
 import Testing
 
-@testable import Obsidian
+@testable import ObsidianCore
 
 @Suite("Obsidian/Foundation/Result: Transmute")
 struct ResultTransmuteTests {

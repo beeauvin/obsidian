@@ -4,7 +4,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import Testing
-@testable import Obsidian
+@testable import ObsidianCore
 
 @Suite("Obsidian/Foundation/Result: Otherwise")
 struct ResultOtherwiseTests {
