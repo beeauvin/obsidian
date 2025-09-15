@@ -14,12 +14,12 @@ public extension Result where Failure == Error {
   ///
   /// ```swift
   /// // Convert a throwing function call into a Result
-  /// let result = Result<Data, Error>.catching {
+  /// let result = Result<Data, Error>.Catching {
   ///   try file_manager.contents(atPath: path)
   /// }
   ///
   /// // Chain with other Result extensions
-  /// let text = Result<Data, Error>.catching {
+  /// let text = Result<Data, Error>.Catching {
   ///   try file_manager.contents(atPath: path)
   /// }.transform { data in
   ///   String(data: data, encoding: .utf8)
@@ -28,7 +28,7 @@ public extension Result where Failure == Error {
   ///
   /// - Parameter body: A throwing closure to execute
   /// - Returns: A Result containing either the value returned by the closure or the thrown error
-  static func catching(_ body: () throws -> Success) -> Result<Success, Failure> {
+  static func Catching(_ body: () throws -> Success) -> Result<Success, Failure> {
     do {
       return .success(try body())
     } catch {
@@ -36,20 +36,26 @@ public extension Result where Failure == Error {
     }
   }
   
+  /// Alias to `Catching` for api compatibility.
+  @available(*, deprecated, renamed: "Catching", message: "Static methods use Pascal case in Obsidian.")
+  static func catching(_ body: () throws -> Success) -> Result<Success, Failure> {
+    return .Catching(body)
+  }
+  
   // MARK: - Async Catching
   
   /// Creates a Result by running the provided async throwing closure, capturing either a success or an error.
   ///
-  /// This method provides an async variant of `catching(_:)` for use with Swift's structured concurrency.
+  /// This method provides an async variant of `Catching(_:)` for use with Swift's structured concurrency.
   ///
   /// ```swift
   /// // Convert an async throwing function call into a Result
-  /// let result = await Result<Data, Error>.catching {
+  /// let result = await Result<Data, Error>.Catching {
   ///   try await network_service.fetch_data(from: url)
   /// }
   ///
   /// // Chain with other Result extensions
-  /// let text = await Result<Data, Error>.catching {
+  /// let text = await Result<Data, Error>.Catching {
   ///   try await network_service.fetch_data(from: url)
   /// }.transform { data in
   ///   String(data: data, encoding: .utf8)
@@ -58,11 +64,17 @@ public extension Result where Failure == Error {
   ///
   /// - Parameter body: An async throwing closure to execute
   /// - Returns: A Result containing either the value returned by the closure or the thrown error
-  static func catching(_ body: () async throws -> Success) async -> Result<Success, Failure> {
+  static func Catching(_ body: () async throws -> Success) async -> Result<Success, Failure> {
     do {
       return .success(try await body())
     } catch {
       return .failure(error)
     }
+  }
+  
+  /// Alias to `Catching` for api compatibility.
+  @available(*, deprecated, renamed: "Catching", message: "Static methods use Pascal case in Obsidian.")
+  static func catching(_ body: () async throws -> Success) async -> Result<Success, Failure> {
+    return await .Catching(body)
   }
 }
