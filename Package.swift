@@ -15,6 +15,7 @@ let package = Package(
     .library(name: "Obsidian", targets: ["Obsidian"]),
     .library(name: "ObsidianCore", targets: ["ObsidianCore"]),
     .library(name: "ObsidianFoundation", targets: ["ObsidianFoundation"]),
+    .library(name: "ObsidianFlow", targets: ["ObsidianFlow"]),
   ],
   targets: [
     .target(name: "Obsidian", dependencies: [
@@ -28,5 +29,8 @@ let package = Package(
     
     .target(name: "ObsidianFoundation", dependencies: ["ObsidianCore"], path: "Sources/Foundation"),
     .testTarget(name: "ObsidianFoundationTests", dependencies: ["ObsidianFoundation"], path: "Tests/Foundation"),
+
+    .target(name: "ObsidianFlow", dependencies: ["ObsidianCore", "ObsidianFoundation"], path: "Sources/Flow"),
+    .testTarget(name: "ObsidianFlowTests", dependencies: ["Obsidian", "ObsidianFlow"], path: "Tests/Flow"),
   ]
 )
