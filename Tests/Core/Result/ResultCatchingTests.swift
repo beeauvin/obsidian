@@ -37,7 +37,7 @@ struct ResultCatchingTests {
   @Test("catching(_:) returns success when no error thrown")
   func catching_returns_success_when_no_error_thrown() throws {
     // When
-    let result = Result<String, Error>.catching {
+    let result = Result<String, Error>.Catching {
       try success_function()
     }
     
@@ -52,7 +52,7 @@ struct ResultCatchingTests {
   @Test("catching(_:) returns failure when error thrown")
   func catching_returns_failure_when_error_thrown() throws {
     // When
-    let result = Result<String, Error>.catching {
+    let result = Result<String, Error>.Catching {
       try failure_function()
     }
     
@@ -69,7 +69,7 @@ struct ResultCatchingTests {
   @Test("catching(_:) with async returns success when no error thrown")
   func catching_async_returns_success_when_no_error_thrown() async throws {
     // When
-    let result = await Result<Int, Error>.catching {
+    let result = await Result<Int, Error>.Catching {
       try await async_success_function()
     }
     
@@ -84,7 +84,7 @@ struct ResultCatchingTests {
   @Test("catching(_:) with async returns failure when error thrown")
   func catching_async_returns_failure_when_error_thrown() async throws {
     // When
-    let result = await Result<Int, Error>.catching {
+    let result = await Result<Int, Error>.Catching {
       try await async_failure_function()
     }
     

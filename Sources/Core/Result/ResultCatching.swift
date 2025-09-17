@@ -36,12 +36,6 @@ public extension Result where Failure == Error {
     }
   }
   
-  /// Alias to `Catching` for api compatibility.
-  @available(*, deprecated, renamed: "Catching", message: "Static methods use Pascal case in Obsidian.")
-  static func catching(_ body: () throws -> Success) -> Result<Success, Failure> {
-    return .Catching(body)
-  }
-  
   // MARK: - Async Catching
   
   /// Creates a Result by running the provided async throwing closure, capturing either a success or an error.
@@ -70,11 +64,5 @@ public extension Result where Failure == Error {
     } catch {
       return .failure(error)
     }
-  }
-  
-  /// Alias to `Catching` for api compatibility.
-  @available(*, deprecated, renamed: "Catching", message: "Static methods use Pascal case in Obsidian.")
-  static func catching(_ body: () async throws -> Success) async -> Result<Success, Failure> {
-    return await .Catching(body)
   }
 }
