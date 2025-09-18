@@ -5,11 +5,7 @@
 [![tests](https://github.com/beeauvin/obsidian/actions/workflows/tests.yml/badge.svg)](https://github.com/beeauvin/obsidian/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/beeauvin/obsidian/graph/badge.svg?token=lh06ObzlsO)](https://codecov.io/gh/beeauvin/obsidian)
 
-🔮 Obsidian is a comprehensive Swift 6+ utility library designed around the principle that code should be both
-functional and beautiful. It provides natural language interfaces for Swift's foundation types alongside
-a complete reactive messaging framework. From elegant Optional and Result extensions to thread-safe
-event-driven systems, Obsidian transforms how you write Swift code - making it read like prose while
-delivering powerful, type-safe functionality.
+🔮 Obsidian is a comprehensive Swift 6+ utility library that transforms error handling, optional chaining, and reactive messaging. It replaces Swift's symbolic operations (`??`, `map`, `flatMap`) with natural language methods (`otherwise`, `transform`, `when`) while providing a complete actor-safe messaging framework for building event-driven applications.
 
 ## Modules
 
