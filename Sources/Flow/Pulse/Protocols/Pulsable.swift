@@ -22,7 +22,7 @@
 /// }
 ///
 /// struct SettingsChanged: Pulsable {
-///   let settings: [String: Any]
+///   let settings: [String: String]  // Use Codable types
 ///   let changed_by: UUID
 /// }
 /// ```

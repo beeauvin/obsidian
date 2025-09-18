@@ -1,3 +1,8 @@
+// Copyright © 2025 Cassidy Spring (Bee). Obsidian Project.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 // swift-tools-version: 6.1
 
 import PackageDescription
@@ -21,6 +26,7 @@ let package = Package(
     .target(name: "Obsidian", dependencies: [
       .target(name: "ObsidianCore"),
       .target(name: "ObsidianFoundation"),
+      .target(name: "ObsidianFlow"),
     ], path: "Sources/Obsidian"),
     .testTarget(name: "ObsidianTests", dependencies: ["Obsidian"], path: "Tests/Obsidian"),
 
