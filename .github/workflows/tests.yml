@@ -20,8 +20,8 @@ jobs:
     name: test with swift ${{ matrix.swift }} on ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-15, macos-14, ubuntu-latest]
-        swift: ["6.1"]
+        os: [macos-15, ubuntu-latest]
+        swift: ["6.2"]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: beeauvin/swiftly-swift@v1
