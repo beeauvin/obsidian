@@ -9,17 +9,18 @@ import Testing
 @Suite("Obsidian/Package")
 struct ObsidianPackageTests {
   /// Test presumably only compiles if it's true.
-  @Test("Re-exports Core (simple test)")
-  func re_exports_core() throws {
-    let test: Optional<String> = .none
-    #expect(test.otherwise("success") == "success")
-  }
-
-  /// Test presumably only compiles if it's true.
   @Test("Re-exports Foundation (simple test)")
   func re_exports_foundation() throws {
     struct TestStruct: Uniquable { let id: UUID = UUID() }
     let test = TestStruct()
     #expect(test.id == test.id)
+  }
+
+  /// Test presumably only compiles if it's true.
+  @Test("Re-exports Flow (simple test)")
+  func re_exports_flow() throws {
+    struct TestPulse: Pulsable { var id: UUID = UUID() }
+    let pulse = Pulse(TestPulse())
+    #expect(pulse.id == pulse.id)
   }
 }
