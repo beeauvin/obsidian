@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import ObsidianCore
+import Folklore
 import ObsidianFoundation
 
 /// Extension to `PulseMeta` providing fluent modification capabilities.
@@ -57,7 +57,7 @@ internal extension PulseMeta {
       tags: tags.otherwise(original.tags)
     )
   }
-  
+
   /// Creates a new PulseMeta instance with updated properties.
   ///
   /// This instance method provides a more ergonomic way to use the fluent pattern,

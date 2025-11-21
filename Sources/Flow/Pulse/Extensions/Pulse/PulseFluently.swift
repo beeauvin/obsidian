@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import ObsidianCore
+import Folklore
 
 /// Internal extension providing fluent builder pattern support for Pulse instances.
 ///
@@ -45,7 +45,7 @@ internal extension Pulse {
       meta: meta.otherwise(pulse.meta)
     )
   }
-  
+
   /// Creates a new Pulse with selectively updated properties using the fluent pattern.
   ///
   /// This instance method provides a more natural interface for the fluent builder pattern,

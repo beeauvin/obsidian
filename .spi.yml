@@ -2,7 +2,6 @@ version: 1
 builder:
   configs:
     - documentation_targets:
-      - Obsidian
-      - ObsidianCore
-      - ObsidianFoundation
-      - ObsidianFlow
+        - Obsidian
+        - ObsidianFoundation
+        - ObsidianFlow

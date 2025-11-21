@@ -1,0 +1,15 @@
+{
+  "originHash" : "0455890e5dcb12ec316749291d700a506c8dc7c7348885e0704a80d5991f171a",
+  "pins" : [
+    {
+      "identity" : "folklore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/beeauvin/folklore.git",
+      "state" : {
+        "revision" : "81d7ee17f655573b9a96de1de356bea9c945e763",
+        "version" : "1.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}
