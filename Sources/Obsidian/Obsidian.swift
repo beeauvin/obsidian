@@ -3,7 +3,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-// Re-export Core, Foundation & Flow
-@_exported import ObsidianCore
+// Re-export Foundation & Flow
 @_exported import ObsidianFoundation
 @_exported import ObsidianFlow

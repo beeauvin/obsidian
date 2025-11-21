@@ -5,14 +5,11 @@
 [![tests](https://github.com/beeauvin/obsidian/actions/workflows/tests.yml/badge.svg)](https://github.com/beeauvin/obsidian/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/beeauvin/obsidian/graph/badge.svg?token=lh06ObzlsO)](https://codecov.io/gh/beeauvin/obsidian)
 
-🔮 Obsidian is a comprehensive Swift 6+ utility library that transforms error handling, optional chaining, and reactive messaging. It replaces Swift's symbolic operations (`??`, `map`, `flatMap`) with natural language methods (`otherwise`, `transform`, `when`) while providing a complete actor-safe messaging framework for building event-driven applications.
+🔮 Obsidian is a Swift 6+ library for expressive, actor-safe messaging. It focuses on the reactive Flow framework (pulses, channels, streams) and a small set of foundation protocols for consistent identity, naming, and description across your domain types.
 
 ## Modules
 
 Obsidian is organized into focused modules, each addressing specific aspects of Swift development:
-
-### [**ObsidianCore**](Sources/Core/readme.md)
-Natural language extensions for Optional and Result types with seamless conversion between them. Transform how you work with Swift's fundamental types using expressive, readable methods like `otherwise`, `transform`, `when`, and `transmute`.
 
 ### [**ObsidianFoundation**](Sources/Foundation/readme.md)
 Protocols for consistent interfaces across types: `Uniquable` for UUID-based identification, `Namable` for consistent naming, `Describable` for textual descriptions, and `Representable` for combined representation.
@@ -21,7 +18,7 @@ Protocols for consistent interfaces across types: `Uniquable` for UUID-based ide
 A comprehensive reactive messaging framework providing type-safe messaging primitives with Pulses, Channels, and Streams. Built for Swift's actor system with natural language APIs and immutable message design.
 
 ### **Obsidian** (Umbrella Module)
-The main module that imports and exposes Core, Foundation, and Flow modules. Import `Obsidian` to access all Obsidian features: utilities, protocols, and reactive messaging.
+The main module re-exports Foundation and Flow. Import `Obsidian` to access all Obsidian features: protocols and reactive messaging.
 
 ## Getting Started
 
@@ -40,31 +37,19 @@ dependencies: [
 Import Obsidian to access all features:
 
 ```swift
-import Obsidian  // Imports Foundation utilities and Flow framework
+import Obsidian  // Re-exports Foundation utilities and the Flow framework
 ```
 
 For Flow-specific functionality, you can also import individual modules:
 
 ```swift
 import ObsidianFlow  // Just the reactive messaging framework
-import ObsidianCore  // Just the utility extensions
 ```
 
 ## Quick Start
 
 ```swift
 import Obsidian
-
-// Use natural language Optional extensions
-let username: String? = get_username()
-let display_name = username.otherwise("Guest")
-
-// Chain Result operations for robust error handling
-let user_data = await Result<Data, Error>.Catching {
-    try await api.fetch_user_data()
-}.transform { data in
-    try JSONDecoder().decode(User.self, from: data)
-}.otherwise { DefaultUser() }
 
 // Create reactive message flows
 struct UserAction: Pulsable {
