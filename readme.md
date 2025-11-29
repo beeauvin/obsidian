@@ -1,11 +1,12 @@
 # 🔮 Obsidian
 
+![license](https://img.shields.io/github/license/beeauvin/obsidian)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbeeauvin%2FObsidian%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/beeauvin/obsidian)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbeeauvin%2FObsidian%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/beeauvin/obsidian)
-[![tests](https://github.com/beeauvin/obsidian/actions/workflows/tests.yml/badge.svg)](https://github.com/beeauvin/obsidian/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/beeauvin/obsidian/graph/badge.svg?token=lh06ObzlsO)](https://codecov.io/gh/beeauvin/obsidian)
 
 🔮 Obsidian is a Swift 6+ library for expressive, actor-safe messaging. It focuses on the reactive Flow framework (pulses, channels, streams) and a small set of foundation protocols for consistent identity, naming, and description across your domain types.
+
+> Obsidian is now hosted on [Codeberg](https://codeberg.org/beeauvin/obsidian). GitHub is a mirror since the Swift Package Index requires a GitHub repository.
 
 ## Modules
 
@@ -28,7 +29,7 @@ Add Obsidian to your Swift package dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/beeauvin/obsidian.git", upToNextMinor: "0.3.0")
+    .package(url: "https://codeberg.org/beeauvin/obsidian.git", upToNextMinor: "0.3.1")
 ]
 ```
 
