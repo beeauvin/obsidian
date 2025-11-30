@@ -1,13 +1,13 @@
 {
-  "originHash" : "0455890e5dcb12ec316749291d700a506c8dc7c7348885e0704a80d5991f171a",
+  "originHash" : "50749a67ed64451c9023d8850a3bbca17008953d50fbfe3be2552535b2e3a4bb",
   "pins" : [
     {
       "identity" : "folklore",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/beeauvin/folklore.git",
+      "location" : "https://codeberg.org/beeauvin/folklore.git",
       "state" : {
-        "revision" : "81d7ee17f655573b9a96de1de356bea9c945e763",
-        "version" : "1.0.1"
+        "revision" : "3c75263327edc506f91e2f8d77a1a79fdf7a8941",
+        "version" : "1.0.2"
       }
     }
   ],

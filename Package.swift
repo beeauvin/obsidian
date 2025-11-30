@@ -17,28 +17,23 @@ let package = Package(
     .watchOS(.v6),
   ],
   products: [
-    .library(name: "Obsidian", targets: ["Obsidian"]),
-    .library(name: "ObsidianFoundation", targets: ["ObsidianFoundation"]),
-    .library(name: "ObsidianFlow", targets: ["ObsidianFlow"]),
+    .library(name: "Obsidian", targets: ["Obsidian"])
   ],
   dependencies: [
-    .package(url: "https://github.com/beeauvin/folklore.git", from: "1.0.1")
+    .package(url: "https://codeberg.org/beeauvin/folklore.git", from: "1.0.2")
   ],
   targets: [
-    .target(name: "Obsidian", dependencies: [
-      .product(name: "Folklore", package: "folklore"),
-      .target(name: "ObsidianFoundation"),
-      .target(name: "ObsidianFlow"),
-    ], path: "Sources/Obsidian"),
-    .testTarget(name: "ObsidianTests", dependencies: ["Obsidian"], path: "Tests/Obsidian"),
-
-    .target(name: "ObsidianFoundation", path: "Sources/Foundation"),
-    .testTarget(name: "ObsidianFoundationTests", dependencies: ["ObsidianFoundation"], path: "Tests/Foundation"),
-
-    .target(name: "ObsidianFlow", dependencies: [
-      .product(name: "Folklore", package: "folklore"),
-      .target(name: "ObsidianFoundation")
-    ], path: "Sources/Flow"),
-    .testTarget(name: "ObsidianFlowTests", dependencies: ["Obsidian", "ObsidianFlow"], path: "Tests/Flow"),
+    .target(
+      name: "Obsidian",
+      dependencies: [
+        .product(name: "Folklore", package: "folklore")
+      ],
+      path: "Source"
+    ),
+    .testTarget(
+      name: "ObsidianTests",
+      dependencies: ["Obsidian"],
+      path: "Tests"
+    ),
   ]
 )

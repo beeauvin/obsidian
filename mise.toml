@@ -3,3 +3,7 @@ experimental = true
 
 [tools]
 swift = '6.2.1'
+
+[tasks.format]
+description = "format swift code"
+run = "swift format . --recursive --in-place"
